@@ -36,3 +36,50 @@ Python tiene sus propias estructuras:
 - Tuplas -> `()`
 - Conjuntos (sets) -> `{}`
 - Diccionarios -> `{key: value}`
+
+### Tipos de colecciones
+
+¿Qué es una colección?
+
+> Un grupo de cero o más elementos que pueden tratarse como una unidad conceptual.
+
+- Non-zero value
+- 0
+- null
+- undefined
+
+Tenemos 2 tipos de colecciones:
+
+- Dinámicas
+- Inmutables
+
+Las estructuras de datos lineales están ordenadas  por posición y solamente el primer elemento NO tiene predecesor. `['D1', 'D2', 'D3', 'D4', 'D5']`
+
+Existen estructuras de datos jerárquicas, como son los árboles. Aquí de igual manera, el primer elemento NO tiene predecesor.
+
+Otra estructura de dato son los grafos. Cada dato puede tener varios predecesores y sucesores.
+
+Incluso existen estructuras de datos desordenadas y ordenadas.
+
+- Colección
+  - Grafos
+  - Jerárquicas
+    - Árbol binario
+    - Montículo
+  - Lineales
+    - Lista
+      - Lista ordenada
+    - Cola
+      - Cola de prioridad
+    - Pila
+    - String
+  - Desordenadas
+    - Bolsa
+      - Bolsa ordenada
+    - Diccionario
+      - Diccionario ordenado
+    - Conjunto
+      - Conjunto ordenado
+
+- [Algorithms Course - Graph Theory Tutorial from a Google Engineer](https://www.youtube.com/watch?v=09_LlHjoEiY)
+- [HackerRank](https://www.youtube.com/c/HackerrankOfficial/videos?view=0&sort=p&flow=grid)
