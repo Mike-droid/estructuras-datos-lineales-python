@@ -20,3 +20,19 @@ En este curso veremos:
 - [Linked Lists](https://www.youtube.com/watch?v=FU6I-VtjOes)
 - [Stacks](https://www.youtube.com/watch?v=NKmasqr_Xkw)
 - [Queues](https://www.youtube.com/watch?v=6zmI_BU18xk)
+
+## Elementos de la programación en Python
+
+Convenciones en Python
+
+- variable
+- CONSTANTE
+- nombre_funcion
+- nombreClase
+
+Python tiene sus propias estructuras:
+
+- Listas -> `[]`
+- Tuplas -> `()`
+- Conjuntos (sets) -> `{}`
+- Diccionarios -> `{key: value}`
