@@ -83,3 +83,70 @@ Incluso existen estructuras de datos desordenadas y ordenadas.
 
 - [Algorithms Course - Graph Theory Tutorial from a Google Engineer](https://www.youtube.com/watch?v=09_LlHjoEiY)
 - [HackerRank](https://www.youtube.com/c/HackerrankOfficial/videos?view=0&sort=p&flow=grid)
+
+### Operaciones esenciales en colecciones
+
+Ejemplo de función recursiva:
+
+```python
+def pyramid_sum(lower, upper, margin=0):
+  blanks = " " * margin
+  print(blanks, lower, upper)
+  if lower > upper:
+    print(blanks, 0)
+    return 0
+  else:
+    result = lower + pyramid_sum(lower + 1, upper, margin + 4)
+    print(blanks, result)
+    return result
+
+
+pyramid_sum(1,4)
+
+"""resultado:
+1 4
+     2 4
+         3 4
+             4 4
+                 5 4
+                 0
+             4
+         7
+     9
+ 10
+"""
+```
+
+### Colecciones incorporadas en Python
+
+#### Listas
+
+- Propósito general
+- Estructura más utilizada
+- Tamaño dinámico
+- De tipo secuencial
+- Ordenable
+- Se declaran con `[]` y `list()`
+
+#### Tuplas
+
+- Inmutable (no se pueden añadir o cambiar).
+- Útiles para datos constantes.
+- Más rápidas que las listas.
+- Tipo secuencial.
+- Se declaron con `()` y `tuple()`
+
+#### Conjuntos / Sets
+
+- Almacenan objetos no duplicados.
+- De acceso rápido.
+- Aceptan operaciones lógicas.
+- Son desordenados.
+- Se declaran con `{}` y `set()`
+
+#### Diccionarios
+
+- Pares de lalve-valor.
+- Arrays asociativos (hash maps).
+- Son desordenados.
+- Se declaran con `{key: value}` y `dict()`
