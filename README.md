@@ -150,3 +150,128 @@ pyramid_sum(1,4)
 - Arrays asociativos (hash maps).
 - Son desordenados.
 - Se declaran con `{key: value}` y `dict()`
+
+## Arrays
+
+### Arrays en Python
+
+Conceptos clave:
+
+- Elemento -> Valor almacenado en las posiciones del array.
+- Índice -> referencia a la posición del elemento.
+
+Podemos hacer arrays de 1D, 2D y 3D pero no se recomienda hacer más de 2D, porque se vuelve muy complejo el computo. Los array son listas, pero las listas no son arrays.
+
+Los arrays se usan por ejemplo en los mapas de bits, son arrays 2D.
+
+### Crear un array
+
+```python
+import random
+
+class Array:
+  def __init__(self, capacity, fill_value=None):
+    self.items = list()
+    for i in range(capacity):
+      self.items.append(fill_value)
+
+  def __len__(self):
+    return len(self.items)
+
+
+  def __str__(self):
+    return str(self.items)
+
+
+  def __iter__(self):
+    return iter(self.items)
+
+
+  def __getitem__(self, index):
+    return self.items[index]
+
+
+  def __setitem__(self, index, new_item):
+    self.items[index] = new_item
+
+
+  def __fill_array__(self):
+    for i in range(len(self.items)):
+      random_number = random.randrange(0, 100)
+      self.items[i] = random_number
+
+
+  def __sum_values__(self):
+    sum = 0
+    for i in range(len(self.items)):
+      if type(self.items[i]) == int:
+        sum += self.items[i]
+    return sum
+
+
+```
+
+### Array de dos dimensiones
+
+```python
+from my_array import Array
+
+
+class Grid():
+  def __init__(self, rows, columns, fill_value=None):
+    self.data = Array(rows)
+    for row in range(rows):
+      self.data[row] = Array(columns, fill_value)
+
+
+  def get_height(self):
+    return len(self.data)
+
+
+  def get_width(self):
+    return len(self.data[0])
+
+
+  def __getitem__(self, index):
+    return self.data[index]
+
+
+  def __str__(self):
+    result = ""
+    for row in range(self.get_height()):
+      for column in range(self.get_width()):
+        result += str(self.data[row][column]) + " "
+
+      result += "\n"
+
+    return str(result)
+
+
+  def fill_Grid(self):
+    for row in range(self.get_height()):
+      Array.__fill_array__(self.data[row])
+      for column in range(self.get_width()):
+        Array.__fill_array__(self.data[column])
+
+
+```
+
+Cubo (con ayuda de Copilot):
+
+```python
+import random
+
+class Cube:
+  def __init__(self, length, fill_value=None):
+    self.length = length
+    self.cube = [[[fill_value for z in range(length)] for y in range(length)] for x in range(length)]
+
+
+  def fill_cube(self):
+    for x in range(self.length):
+      for y in range(self.length):
+        for z in range(self.length):
+          self.cube[x][y][z] = random.randint(1, 100)
+
+
+```
