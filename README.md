@@ -275,3 +275,308 @@ class Cube:
 
 
 ```
+
+## Linked lists
+
+### Nodos y singly linked list
+
+- Consiste de nodos conectados a otros.
+- Los más comunes son *sencillos* o *dobles*.
+- No se accede por índice, sino por recorrido.
+
+Conceptos clave:
+
+- Data: valor almacenado en nodos.
+- Next: referencia al siguiente nodo.
+- Previous: referencia al nodo anterior.
+- Head: referencia al primer nodo.
+- Tail: referencia al último nodo.
+
+Podemos usar las listas para crear Pilas y Colas. También para optimizar código.
+
+Head -> [nodo1 - D1] <-> [nodo2- D2] <-> [nodo3 - D3] <- Tail
+
+**A tomar en cuenta**: Si una lista es muy larga, tomará mucho tiempo recorrerla, esto por O(n).
+
+### Crear nodos
+
+Cada nodo va a tener un valor y un apuntador.
+
+```python
+class Node():
+  def __init__(self, data, next=None):
+    self.data = data
+    self.next = next
+
+```
+
+### Crear singly linked list
+
+```python
+from node import Node
+
+class SinglyLinkedList:
+  def __init__(self):
+    self.head = None
+    self.tail = None
+    self.size = 0
+
+
+  def append(self, data):
+    node = Node(data)
+
+    if self.tail == None and self.head == None:
+      self.head = node
+      self.tail = node
+    else:
+      current = self.tail
+
+      while current.next:
+        current = current.next
+
+      current.next = node
+      self.tail = current.next
+
+    self.size += 1
+
+
+  def size(self):
+    return str(self.size)
+
+
+  def iter(self):
+    current = self.tail
+
+    while current:
+      value = current.data
+      current = current.next
+      yield value #* Genera valores pero NO los almacena
+
+
+  def delete(self, data):
+    current = self.tail
+    previous = self.tail
+
+    while current:
+      if current.data == data:
+        if current == self.tail:
+          self.tail = current.next
+        else:
+          previous.next = current.next
+          self.size -= 1
+          return current.data
+
+      previous = current
+      current = current.next
+
+
+  def search(self, data):
+    flag = False
+    for node in self.iter():
+      if data == node:
+        flag = True
+        print(f'Data {data} found 😎')
+    if not flag:
+      print(f'Data {data} not found 😞')
+
+
+  def clear(self):
+    self.tail = None
+    self.head = None
+    self.size = 0
+
+
+games = SinglyLinkedList()
+games.append('GTA V')
+print(f'head: {games.head.data} & tail: {games.tail.data}')
+games.append('Fifa')
+print(f'head: {games.head.data} & tail: {games.tail.data}')
+games.append('Mario')
+print(f'head: {games.head.data} & tail: {games.tail.data}')
+
+```
+
+### Operaciones en single linked structures
+
+Hay un dilema con las listas. No usan índices, a comparación de los arrays. Para esto, podemos usar una variable auxiliar llamada *probe*.
+
+```python
+from node import Node
+
+# * Creación de los nodos enlazados (linked list)
+head = None
+for count in range(1,6):
+    head = Node(count, head)
+
+
+# * Recorrer e imprimir valores de la lista
+probe = head
+print("Recorrido de la lista:")
+while probe != None:
+    print(probe.data)
+    probe = probe.next
+
+
+# * Busqueda de un elemento
+probe = head
+target_item = 2
+while probe != None and target_item != probe.data:
+    probe = probe.next
+
+if probe != None:
+    print(f'Target item {target_item} has not been found')
+else:
+    print(f'Target item {target_item} has been found')
+
+
+# * Remplazo de un elemento
+probe = head
+target_item = 3
+new_item = "Z"
+
+while probe != None and target_item != probe.data:
+    probe = probe.next
+
+if probe != None:
+    probe.data = new_item
+    print(f"{new_item} replace the old value in the node number {target_item}")
+else:
+    print(f"The target item {target_item} is not in the linked list")
+
+
+# * Insertar un nuevo elemento/nodo al inicio(head)
+head = Node("F", head)
+
+
+# * Insertar un nuevo elemento/nodo al final(tail)
+new_node = Node("K")
+if head is None:
+    head = new_node
+else:
+    probe = head
+    while probe.next != None:
+        probe = probe.next
+    probe.next = new_node
+
+
+# * Eliminar un elemento/nodo al inicio(head)
+removed_item = head.data
+head = head.next
+print("Removed_item: ",end="")
+print(removed_item)
+
+
+# * Eliminar un elemento/nodo al final(tail)
+removed_item = head.data
+if head.next is None:
+    head = None
+else:
+    probe = head
+    while probe.next.next != None:
+        probe = probe.next
+    removed_item = probe.next.data
+    probe.next = None
+
+print("Removed_item: ",end="")
+print(removed_item)
+
+# * Agregar un nuevo elemento/nodo por "indice" inverso(Cuenta de Head - Tail)
+# new_item = input("Enter new item: ")
+# index = int(input("Enter the position to insert the new item: "))
+new_item = "10"
+index = 3
+
+if head is None or index <= 0:
+    head = Node(new_item, head)
+else:
+    probe = head
+    while index > 1 and probe.next != None:
+        probe = probe.next
+        index -= 1
+    probe.next = Node(new_item, probe.next)
+
+# * Agregar un nuevo elemento/nodo por "indice" inverso(Cuenta de Head - Tail)
+
+
+# * Eliminar un nuevo elemento/nodo por "indice" inverso(Cuenta de Head - Tail)
+index = 3
+
+if head is None or index <= 0:
+    removed_item = head.data
+    head = head.next
+    print(removed_item)
+else:
+    probe = head
+    while index > 1 and probe.next.next != None:
+        probe = probe.next
+        index -= 1
+    removed_item = probe.next.data
+    probe.next = probe.next.next
+
+    print("Removed_item: ",end="")
+    print(removed_item)
+
+
+```
+
+### Operaciones a detalle
+
+### Circular linked list
+
+El último nodo hace referencia al primer nodo.
+
+```python
+index = 1
+new_item = 'ham'
+head = Node(None, None)
+head.next = head
+probe = head
+while index > 0 and probe.next != head:
+    probe = probe.next
+    index -= 1
+
+probe.next = Node(new_item, probe.next)
+print(probe.next.data)
+#ham
+
+```
+
+### Double linked list
+
+Aquí los punteros hacen referencia al siguiente nodo y al anterior.
+
+```python
+class Node(object):
+    def __init__(self, data, next = None):
+        self.data = data
+        self.next = next
+
+
+class TwoWayNode(Node):
+    def __init__(self, data, previous = None, next = None):
+        Node.__init__(self, data, next)
+        self.previous = previous
+
+
+    def add_after(self, node):
+        node = TwoWayNode(node)
+        if self.next == None:
+            self.next = node
+            node.previous = self
+        else:
+            probe = self
+            while probe.next != None:
+                probe = probe.next
+            probe.next = node
+            node.previous = probe
+
+
+    def find_node(self, data):
+        if self.data == data:
+            return (f'Se ha encontrado {self.data}')
+        elif self.next == None:
+            return (f'No existe ese dato')
+        else:
+            return self.next.find_node(data)
+
+```
